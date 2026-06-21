@@ -1,0 +1,17 @@
+name: Sync to HuggingFace
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Push to HuggingFace
+        run: |
+          git remote add hf https://ggvssyakumo01:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/ggvssyakumo01/n8n-automation
+          git push hf main --force
